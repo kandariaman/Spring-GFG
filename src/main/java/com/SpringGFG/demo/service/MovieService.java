@@ -10,24 +10,26 @@ import java.util.Map;
 @Service
 public class MovieService {
 
-    private Map<String, Movie> movieMap = new HashMap<>();
+    private Map<Integer, Movie> movieMap = new HashMap<>();
 
     public boolean addMovie(Movie movie){
-        this.movieMap.put("firstMovie", movie);
+        int id = this.movieMap.size() + 1;
+        movie.setId(id);
+        this.movieMap.put(id, movie);
 
         return true;
     }
 
-    public boolean deleteMovie(String movieName){
-        if(movieMap.containsKey(movieName)){
-            movieMap.remove(movieName);
+    public boolean deleteMovie(Integer id){
+        if(movieMap.containsKey(id)){
+            movieMap.remove(id);
         }
         return true;
     }
 
-    public boolean updateMovie(String title, Movie movie){
-        if(movieMap.containsKey(title)){
-            movieMap.put(title,movie);
+    public boolean updateMovie(Integer id, Movie movie){
+        if(movieMap.containsKey(id)){
+            movieMap.put(id,movie);
             return true;
         }
         return false;
@@ -37,7 +39,7 @@ public class MovieService {
         return this.movieMap.values().stream().toList();
     }
 
-    public Movie getMovieByTitle(String title) {
-        return this.movieMap.get(title);
+    public Movie getMovieByTitle(Integer id) {
+        return this.movieMap.get(id);
     }
 }

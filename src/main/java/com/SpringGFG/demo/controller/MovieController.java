@@ -5,6 +5,8 @@ import com.SpringGFG.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class MovieController {
 
@@ -21,17 +23,17 @@ public class MovieController {
     }
 
     @GetMapping("/movie")
-    public void getMovies(){
-        movieService.getAllMovies();
+    public List<Movie> getMovies(){
+        return movieService.getAllMovies();
     }
 
-    @GetMapping("/movie/{title}")
-    public void getAllMovies(@PathVariable("title") String title) {
-        movieService.getMovieByTitle(title);
+    @GetMapping("/movie/{id}")
+    public void getMovieByTitle(@PathVariable("id") Integer id) {
+        movieService.getMovieByTitle(id);
     }
 
-    @DeleteMapping("/movie/{title}")
-    public void deleteMovie(@PathVariable("title") String title){
-        movieService.deleteMovie(title);
+    @DeleteMapping("/movie/{id}")
+    public void deleteMovie(@PathVariable("id") Integer id){
+        movieService.deleteMovie(id);
     }
 }
